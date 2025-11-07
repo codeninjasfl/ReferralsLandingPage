@@ -503,7 +503,9 @@
           <span class="icon">✨</span>
           <span><strong>$100 off</strong> your next month when your referral enrolls.</span>
         </div>
-        <form>
+        <form id="referral-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="a7083fda-1e4f-4c29-aafd-d5a5c5929932" />
+          <input type="hidden" id="subject" name="subject" value="Code Ninjas Referral Program" />
           <div class="field-group-label">Your Info</div>
           <div class="field">
             <label for="ref-parent-name">Your Name*</label>
@@ -541,7 +543,7 @@
 
           <div class="field-group-label">Permission</div>
           <div class="checkbox-row">
-            <input id="consent" name="consent" type="checkbox" required />
+            <input id="consent" type="checkbox" required />
             <label for="consent">
               I confirm I have permission to share this family's details so Code Ninjas may send them a one-time invitation.
             </label>
@@ -558,6 +560,7 @@
           <div class="tiny-note">
             We’ll reach out respectfully with more information about Code Ninjas—no spam, no pressure.
           </div>
+          <div id="form-status" aria-live="polite" style="margin-top:6px; font-size:9px;"></div>
         </form>
       </section>
     </main>
@@ -581,5 +584,135 @@
       </div>
     </section>
   </div>
+  <script>
+    (function () {
+      const form = document.getElementById('referral-form');
+      const dojoSelect = document.getElementById('ref-location');
+      const subjectInput = document.getElementById('subject');
+
+      if (!form || !dojoSelect || !subjectInput) return;
+
+      const submitBtn = form.querySelector('.primary-btn');
+      const kicker = submitBtn ? submitBtn.querySelector('.kicker') : null;
+      const statusEl = document.getElementById('form-status');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const dojo = dojoSelect.value || 'Unknown Dojo';
+        subjectInput.value = 'Code Ninjas Referral - ' + dojo;
+
+        if (statusEl) {
+          statusEl.textContent = 'Sending your referral...';
+          statusEl.style.color = '#2563eb';
+        }
+
+        if (submitBtn && kicker) {
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.9';
+          submitBtn.style.cursor = 'default';
+          kicker.textContent = 'Sending...';
+        }
+
+        // Grab values explicitly
+        const accessKeyInput = form.querySelector('input[name="access_key"]');
+        const accessKey = accessKeyInput ? accessKeyInput.value : '';
+
+        const refParentName = (document.getElementById('ref-parent-name')?.value || '').trim();
+        const guestParentName = (document.getElementById('guest-parent-name')?.value || '').trim();
+        const guestChildName = (document.getElementById('guest-child-name')?.value || '').trim();
+        const guestEmail = (document.getElementById('guest-email')?.value || '').trim();
+        const guestPhone = (document.getElementById('guest-phone')?.value || '').trim();
+        const notes = (document.getElementById('relationship')?.value || '').trim();
+
+        // Build a human-readable message body
+        let message = `A new Code Ninjas referral was submitted.
+
+` +
+          `Referring Parent: ${refParentName || 'N/A'}
+` +
+          `Dojo: ${dojo}
+
+` +
+          `Referred Family:
+` +
+          `Parent: ${guestParentName || 'N/A'}
+` +
+          `Child: ${guestChildName || 'N/A'}
+` +
+          `Parent Email: ${guestEmail || 'N/A'}
+` +
+          `Preferred Phone: ${guestPhone || 'N/A'}`;
+
+        if (notes) {
+          message += `
+
+Notes: ${notes}`;
+        }
+
+        const payload = new FormData();
+        if (accessKey) payload.append('access_key', accessKey);
+        payload.append('subject', subjectInput.value);
+        payload.append('from_name', refParentName || 'Code Ninjas Referral Form');
+        payload.append('message', message);
+
+        try {
+          const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: payload,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          const data = await response.json().catch(() => ({}));
+          console.log('Web3Forms response:', data);
+
+          if (response.ok && (data.success !== false)) {
+            console.log('Referral submitted successfully.');
+
+            if (statusEl) {
+              statusEl.textContent = 'Referral submitted successfully! Thank you for sharing Code Ninjas.';
+              statusEl.style.color = '#16a34a';
+            }
+
+            if (submitBtn && kicker) {
+              kicker.textContent = 'Submitted';
+              const icon = submitBtn.querySelector('span:last-child');
+              if (icon) icon.textContent = '✓';
+            }
+
+            // Lock fields so it visually feels complete
+            Array.from(form.elements).forEach(el => {
+              if (el.tagName === 'BUTTON') return;
+              if (el.tagName === 'SELECT') {
+                el.disabled = true;
+              } else if (el.type === 'checkbox') {
+                el.disabled = true;
+              } else {
+                el.readOnly = true;
+              }
+            });
+          } else {
+            throw new Error(data.message || 'Submission failed');
+          }
+        } catch (err) {
+          console.error('Referral submission error:', err);
+
+          if (statusEl) {
+            statusEl.textContent = 'Something went wrong submitting your referral. Please try again or contact your dojo.';
+            statusEl.style.color = '#b91c1c';
+          }
+
+          if (submitBtn && kicker) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
+            kicker.textContent = 'Submit Referral';
+            const icon = submitBtn.querySelector('span:last-child');
+            if (icon) icon.textContent = '▶';
+          }
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
