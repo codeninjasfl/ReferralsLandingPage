@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Code Ninjas Referral Program</title>
+  <title>Code Ninjas Free Private Class & $100 Savings</title>
   <meta name="theme-color" content="#2563eb" />
   <style>
     :root {
@@ -120,49 +120,6 @@
       margin-bottom:6px;
     }
 
-    .how-it-works {
-      margin-top:6px;
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:6px;
-      font-size:11px;
-    }
-
-    .step {
-      padding:9px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:#f9fafb;
-      display:flex;
-      flex-direction:column;
-      gap:3px;
-    }
-
-    .step-label {
-      font-size:9px;
-      font-weight:700;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:#9ca3af;
-    }
-
-    .step-title {
-      font-size:12px;
-      font-weight:800;
-      color:#111827;
-    }
-
-    .step p {
-      margin:0;
-      color:#6b7280;
-    }
-
-    .mini-note {
-      margin-top:6px;
-      font-size:9px;
-      color:#9ca3af;
-    }
-
     .form-card h2 {
       margin:0 0 4px;
       font-size:17px;
@@ -192,12 +149,6 @@
       color:#9ca3af;
     }
 
-    .row {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:7px;
-    }
-
     .field {
       display:flex;
       flex-direction:column;
@@ -210,12 +161,7 @@
       color:#6b7280;
     }
 
-    .field span.helper {
-      font-size:9px;
-      color:#9ca3af;
-    }
-
-    input, select, textarea {
+    select, input {
       width:100%;
       padding:9px 10px;
       border-radius:11px;
@@ -223,33 +169,14 @@
       font-size:11px;
       font-family:var(--font-sans);
       outline:none;
-      transition:border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+      transition:border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), opacity var(--transition-fast);
       background:#ffffff;
     }
 
-    input:focus, select:focus, textarea:focus {
+    select:focus, input:focus {
       border-color:var(--brand);
       box-shadow:0 0 0 2px rgba(37,99,235,0.1);
       background:#f9fafb;
-    }
-
-    textarea {
-      min-height:60px;
-      resize:vertical;
-    }
-
-    .checkbox-row {
-      display:flex;
-      align-items:flex-start;
-      gap:6px;
-      font-size:9px;
-      color:#6b7280;
-    }
-
-    .checkbox-row input[type="checkbox"] {
-      width:auto;
-      margin-top:2px;
-      accent-color:var(--brand);
     }
 
     .primary-btn {
@@ -267,7 +194,7 @@
       justify-content:center;
       gap:8px;
       box-shadow:var(--shadow-soft);
-      transition:transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+      transition:transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
     }
 
     .primary-btn .kicker {
@@ -278,16 +205,22 @@
       letter-spacing:.16em;
     }
 
-    .primary-btn:hover {
+    .primary-btn:hover:not([disabled]) {
       transform:translateY(-1px);
       box-shadow:0 18px 40px rgba(15,23,42,.25);
       filter:brightness(1.03);
     }
 
-    .primary-btn:active {
+    .primary-btn:active:not([disabled]) {
       transform:translateY(0px);
       box-shadow:var(--shadow-soft);
       filter:brightness(.99);
+    }
+
+    .primary-btn[disabled] {
+      opacity:0.5;
+      cursor:not-allowed;
+      box-shadow:none;
     }
 
     .tiny-note {
@@ -311,144 +244,33 @@
       font-weight:600;
     }
 
-    .reward-banner .icon {
-      font-size:12px;
-    }
-
-    /* FAQ CARD: high contrast, easy to read */
-    .faq-card {
-      width:min(640px,100%);
-      margin:10px auto 0;
-      background:#ffffff;
-      color:#111827;
-      border-radius:18px;
-      padding:14px 16px 16px;
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:12px;
-      font-size:12px;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-    }
-
-    .faq-card h3 {
-      margin:0 0 4px;
-      font-size:13px;
-      font-weight:700;
-      color:#111827;
-    }
-
-    .faq-card p {
-      margin:0;
-      color:#374151; /* darker for better contrast */
-      line-height:1.65;
-      font-weight:400;
-    }
+    .reward-banner .icon { font-size:12px; }
 
     @media (max-width:768px) {
-      .page-wrap {
-        padding:14px 10px 20px;
-      }
-      header img.logo {
-        height:32px;
-      }
-      header h1 {
-        font-size:22px;
-      }
-      header p.sub {
-        font-size:12px;
-      }
-      .card {
-        padding:14px 14px 16px;
-        border-radius:18px;
-      }
-      .how-it-works {
-        grid-template-columns:repeat(3,minmax(0,1fr));
-        gap:4px;
-      }
-      .row {
-        grid-template-columns:1fr;
-        gap:6px;
-      }
-      .faq-card {
-        width:100%;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        padding:12px 10px 13px;
-      }
+      .page-wrap { padding:14px 10px 20px; }
+      header img.logo { height:32px; }
+      header h1 { font-size:22px; }
+      header p.sub { font-size:12px; }
+      .card { padding:14px 14px 16px; border-radius:18px; }
     }
 
     @media (max-width:520px) {
-      header h1 {
-        font-size:20px;
-      }
-      .faq-card {
-        grid-template-columns:1fr;
-        gap:8px;
-      }
-      .reward-banner {
-        align-items:flex-start;
-      }
+      header h1 { font-size:20px; }
+      .reward-banner { align-items:flex-start; }
     }
-      @media (min-width:1024px) {
-      .layout {
-        width:min(760px,100%);
-      }
-      header h1 {
-        font-size:36px;
-      }
-      header p.sub {
-        font-size:16px;
-      }
-      .hero-copy h2 {
-        font-size:24px;
-      }
-      .hero-copy p {
-        font-size:15px;
-      }
-      .how-it-works {
-        font-size:12px;
-      }
-      .step-title {
-        font-size:14px;
-      }
-      .mini-note {
-        font-size:10px;
-      }
-      .form-card h2 {
-        font-size:20px;
-      }
-      .form-card p {
-        font-size:13px;
-      }
-      .field-group-label {
-        font-size:11px;
-      }
-      .field {
-        font-size:11px;
-      }
-      input, select, textarea {
-        font-size:12px;
-        padding:10px 11px;
-      }
-      .checkbox-row {
-        font-size:10px;
-      }
-      .primary-btn {
-        font-size:13px;
-      }
-      .primary-btn .kicker {
-        font-size:10px;
-      }
-      .tiny-note {
-        font-size:9px;
-      }
-      .faq-card {
-        width:min(760px,100%);
-        font-size:13px;
-      }
-      .faq-card h3 {
-        font-size:14px;
-      }
+
+    @media (min-width:1024px) {
+      .layout { width:min(760px,100%); }
+      header h1 { font-size:36px; }
+      header p.sub { font-size:16px; }
+      .hero-copy h2 { font-size:24px; }
+      .hero-copy p { font-size:15px; }
+      .form-card h2 { font-size:20px; }
+      .form-card p { font-size:13px; }
+      .field-group-label { font-size:11px; }
+      .field { font-size:11px; }
+      select, input { font-size:12px; padding:10px 11px; }
+      .tiny-note { font-size:9px; }
     }
   </style>
 </head>
@@ -459,60 +281,43 @@
         <img class="logo" src="https://www.codeninjas.com/hubfs/Group%201.svg" alt="Code Ninjas logo" onerror="this.style.display='none'">
       </div>
       <h1>Code Ninjas Referral Program</h1>
-      <p class="sub">Refer a friend in under 30 seconds. Get <strong>$100 off</strong> when they enroll.</p>
+      <p class="sub">Schedule a free private game-building session and unlock <strong>$100 off</strong> when you enroll.</p>
     </header>
 
     <main class="layout">
-      <!-- Compact hero/overview -->
-      <section class="card hero-copy" aria-label="Referral overview">
+      <section class="card hero-copy" aria-label="Free private class overview">
         <div class="highlight">
-          <span>$100 Referral Reward</span>
+          <span>$0 Private Class + $100 Off</span>
         </div>
-        <h2>Refer in seconds.</h2>
+        <h2>Schedule a free private class!</h2>
         <p>
-          Tell us who you are and who you're referring. If they enroll in a qualifying program at your dojo,
-          you receive <strong>$100 off your next month</strong>.
-        </p>
-        <div class="how-it-works" style="margin-top:10px; grid-template-columns:repeat(3,minmax(0,1fr));">
-          <div class="step">
-            <div class="step-label">1</div>
-            <div class="step-title">Submit</div>
-            <p>Share your info and your friend's details.</p>
-          </div>
-          <div class="step">
-            <div class="step-label">2</div>
-            <div class="step-title">We Invite</div>
-            <p>Our team reaches out with a friendly, no-pressure invite.</p>
-          </div>
-          <div class="step">
-            <div class="step-label">3</div>
-            <div class="step-title">You Save</div>
-            <p>When they enroll, you get $100 off.</p>
-          </div>
-        </div>
-        <p class="mini-note">
-          New families only. Credit applied after enrollment; one $100 credit per new family referred.
+          And if you enroll in a qualifying program at your selected dojo after your free private class, you receive <strong>$100 off your first month</strong>.
         </p>
       </section>
 
-      <!-- Clean single-column form -->
-      <section class="card form-card" aria-label="Referral form">
-        <h2>Start a Referral</h2>
-        <p>One simple form. We handle the rest.</p>
-        <div class="reward-banner">
-          <span class="icon">✨</span>
-          <span><strong>$100 off</strong> your next month when your referral enrolls.</span>
-        </div>
-        <form id="referral-form" action="https://api.web3forms.com/submit" method="POST">
+      <section class="card form-card" aria-label="Free private class form">
+        <h2>Claim Your Free Private Class</h2>
+        <p>Complete this quick form and then book your time instantly.</p>
+
+        <form id="referral-form">
           <input type="hidden" name="access_key" value="a7083fda-1e4f-4c29-aafd-d5a5c5929932" />
-          <input type="hidden" id="subject" name="subject" value="Code Ninjas Referral Program" />
+          <input type="hidden" id="subject" name="subject" value="Code Ninjas Free Private Class" />
+
           <div class="field-group-label">Your Info</div>
           <div class="field">
-            <label for="ref-parent-name">Your Name*</label>
+            <label for="guest-name">Your Name*</label>
+            <input id="guest-name" name="guestName" required />
+          </div>
+
+          <div class="field-group-label">Who Referred You?</div>
+          <div class="field">
+            <label for="ref-parent-name">Referring Parent's Name (Who's Social Media did you get this site from?)*</label>
             <input id="ref-parent-name" name="refParentName" required />
           </div>
+
+          <div class="field-group-label">Preferred Dojo</div>
           <div class="field">
-            <label for="ref-location">Your Dojo*</label>
+            <label for="ref-location">Preferred Dojo*</label>
             <select id="ref-location" name="refLocation" required>
               <option value="" disabled selected>Select your location</option>
               <option value="Aventura">Aventura</option>
@@ -521,142 +326,153 @@
             </select>
           </div>
 
-          <div class="field-group-label">Friend's Info</div>
-          <div class="field">
-            <label for="guest-parent-name">Parent Name*</label>
-            <input id="guest-parent-name" name="guestParentName" required />
-          </div>
-          <div class="field">
-            <label for="guest-child-name">Child's Name*</label>
-            <input id="guest-child-name" name="guestChildName" required />
-          </div>
-          <div class="row">
-            <div class="field">
-              <label for="guest-email">Parent Email*</label>
-              <input id="guest-email" name="guestEmail" type="email" required />
-            </div>
-            <div class="field">
-              <label for="guest-phone">Preferred Phone*</label>
-              <input id="guest-phone" name="guestPhone" type="tel" required />
-            </div>
-          </div>
-
-          <div class="field-group-label">Permission</div>
-          <div class="checkbox-row">
-            <input id="consent" type="checkbox" required />
-            <label for="consent">
-              I confirm I have permission to share this family's details so Code Ninjas may send them a one-time invitation.
-            </label>
-          </div>
-
-          <button type="submit" class="primary-btn">
+          <button type="submit" class="primary-btn" id="schedule-btn" disabled>
             <div>
-              <div class="kicker">Submit Referral</div>
-              <div>Send my friend an invite</div>
+              <div class="kicker">Locked until everything is filled out</div>
+              <div>Schedule a free private class now!</div>
             </div>
             <span>▶</span>
           </button>
 
           <div class="tiny-note">
-            We’ll reach out respectfully with more information about Code Ninjas—no spam, no pressure.
+            Select your preferred dojo to unlock scheduling. Your info helps us track your savings as part of our referral program.
           </div>
           <div id="form-status" aria-live="polite" style="margin-top:6px; font-size:9px;"></div>
         </form>
       </section>
     </main>
-
-    <section class="faq-card" aria-label="Referral FAQs">
-      <div>
-        <h3>Who can I refer?</h3>
-        <p>Any family that is new to Code Ninjas and not currently enrolled or already in our sign-up process.</p>
-      </div>
-      <div>
-        <h3>When is $100 applied?</h3>
-        <p>After your referred family completes enrollment in a qualifying program at your dojo, your $100 credit is applied to your next billing cycle.</p>
-      </div>
-      <div>
-        <h3>Can I refer more than one?</h3>
-        <p>Yes. Each new family that enrolls through your referral can earn you an additional $100 credit, per location policy.</p>
-      </div>
-      <div>
-        <h3>How will they be contacted?</h3>
-        <p>Our team sends a friendly invite to learn about Code Ninjas—no spam, just information and an opportunity to visit.</p>
-      </div>
-    </section>
   </div>
+
   <script>
+    // Toggle API submission on/off for debugging.
+    // true = send to Web3Forms + open dojo link
+    // false = skip API call, just open dojo link as if successful
+    const USE_API = true;
+
     (function () {
       const form = document.getElementById('referral-form');
       const dojoSelect = document.getElementById('ref-location');
+      const guestNameInput = document.getElementById('guest-name');
+      const refParentInput = document.getElementById('ref-parent-name');
       const subjectInput = document.getElementById('subject');
-
-      if (!form || !dojoSelect || !subjectInput) return;
-
-      const submitBtn = form.querySelector('.primary-btn');
+      const submitBtn = document.getElementById('schedule-btn');
       const kicker = submitBtn ? submitBtn.querySelector('.kicker') : null;
       const statusEl = document.getElementById('form-status');
+
+      if (!form || !dojoSelect || !submitBtn || !subjectInput) return;
+
+      const dojoUrls = {
+        'Aventura': 'https://www.codeninjas.com/fl-aventura',
+        'Cooper City': 'https://www.codeninjas.com/fl-cooper-city',
+        'Weston': 'https://www.codeninjas.com/fl-weston'
+      };
+
+      // Enable/disable button based on dojo + names
+      function updateButtonState() {
+        const dojo = dojoSelect.value;
+        const hasDojo = dojo && dojoUrls[dojo];
+        const hasGuest = (guestNameInput?.value || '').trim().length > 0;
+        const hasRef = (refParentInput?.value || '').trim().length > 0;
+
+        if (hasDojo && hasGuest && hasRef) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.cursor = 'pointer';
+          if (kicker) kicker.textContent = 'Ready to schedule';
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.5';
+          submitBtn.style.cursor = 'not-allowed';
+          if (kicker) kicker.textContent = 'Locked until everything is filled out';
+        }
+      }
+
+      dojoSelect.addEventListener('change', updateButtonState);
+      if (guestNameInput) guestNameInput.addEventListener('input', updateButtonState);
+      if (refParentInput) refParentInput.addEventListener('input', updateButtonState);
+
+      // Set initial state
+      updateButtonState();
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const dojo = dojoSelect.value || 'Unknown Dojo';
-        subjectInput.value = 'Code Ninjas Referral - ' + dojo;
+        const dojo = dojoSelect.value;
+        const scheduleUrl = dojoUrls[dojo];
 
-        if (statusEl) {
-          statusEl.textContent = 'Sending your referral...';
-          statusEl.style.color = '#2563eb';
+        if (!dojo || !scheduleUrl) {
+          if (statusEl) {
+            statusEl.textContent = 'Please select your preferred dojo before scheduling.';
+            statusEl.style.color = '#b91c1c';
+          }
+          return;
         }
 
-        if (submitBtn && kicker) {
-          submitBtn.disabled = true;
-          submitBtn.style.opacity = '0.9';
-          submitBtn.style.cursor = 'default';
-          kicker.textContent = 'Sending...';
-        }
-
-        // Grab values explicitly
         const accessKeyInput = form.querySelector('input[name="access_key"]');
         const accessKey = accessKeyInput ? accessKeyInput.value : '';
 
+        const guestName = (document.getElementById('guest-name')?.value || '').trim();
         const refParentName = (document.getElementById('ref-parent-name')?.value || '').trim();
-        const guestParentName = (document.getElementById('guest-parent-name')?.value || '').trim();
-        const guestChildName = (document.getElementById('guest-child-name')?.value || '').trim();
-        const guestEmail = (document.getElementById('guest-email')?.value || '').trim();
-        const guestPhone = (document.getElementById('guest-phone')?.value || '').trim();
-        const notes = (document.getElementById('relationship')?.value || '').trim();
 
-        // Build a human-readable message body
-        let message = `A new Code Ninjas referral was submitted.
+        subjectInput.value = 'Code Ninjas Free Private Class - ' + dojo;
 
-` +
-          `Referring Parent: ${refParentName || 'N/A'}
-` +
-          `Dojo: ${dojo}
-
-` +
-          `Referred Family:
-` +
-          `Parent: ${guestParentName || 'N/A'}
-` +
-          `Child: ${guestChildName || 'N/A'}
-` +
-          `Parent Email: ${guestEmail || 'N/A'}
-` +
-          `Preferred Phone: ${guestPhone || 'N/A'}`;
-
-        if (notes) {
-          message += `
-
-Notes: ${notes}`;
+        if (!guestName || !refParentName) {
+          if (statusEl) {
+            statusEl.textContent = 'Please complete all required fields.';
+            statusEl.style.color = '#b91c1c';
+          }
+          return;
         }
+
+        if (statusEl) {
+          statusEl.textContent = 'Submitting your details...';
+          statusEl.style.color = '#2563eb';
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.9';
+        submitBtn.style.cursor = 'default';
+        if (kicker) kicker.textContent = 'Submitting...';
+
+        let message = `A new Free Private Class referral entry has been submitted.\n\n` +
+          `Your Name: ${guestName}\n` +
+          `Referring Parent's Name (Social Media Source): ${refParentName}\n` +
+          `Preferred Dojo: ${dojo}\n\n` +
+          `Offer Details:\n` +
+          `This submission is part of the Code Ninjas referral program. The family is directed to schedule a free private game-building class at their selected dojo. ` +
+          `When they enroll in a qualifying program after their free private class, they receive $100 off their next full month, and the referring family may also receive a $100 credit, per location policy.`;
 
         const payload = new FormData();
         if (accessKey) payload.append('access_key', accessKey);
         payload.append('subject', subjectInput.value);
-        payload.append('from_name', refParentName || 'Code Ninjas Referral Form');
+        payload.append('from_name', guestName || 'Code Ninjas Free Class Form');
         payload.append('message', message);
 
         try {
+          if (!USE_API) {
+            // Debug mode: skip API call, behave as if successful
+            if (statusEl) {
+              statusEl.textContent = 'Debug mode: no data sent. Opening your selected dojo page in a new tab.';
+              statusEl.style.color = '#16a34a';
+            }
+
+            Array.from(form.elements).forEach(el => {
+              if (el.tagName === 'BUTTON') return;
+              if (el.tagName === 'SELECT') {
+                el.disabled = true;
+              } else {
+                el.readOnly = true;
+              }
+            });
+
+            const icon = submitBtn.querySelector('span:last-child');
+            if (icon) icon.textContent = '✓';
+            if (kicker) kicker.textContent = 'Submitted (Debug)';
+
+            window.location.href = scheduleUrl;
+            return;
+          }
+
           const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             body: payload,
@@ -667,49 +483,42 @@ Notes: ${notes}`;
           console.log('Web3Forms response:', data);
 
           if (response.ok && (data.success !== false)) {
-            console.log('Referral submitted successfully.');
-
             if (statusEl) {
-              statusEl.textContent = 'Referral submitted successfully! Thank you for sharing Code Ninjas.';
+              statusEl.textContent = 'Form submitted! Opening your selected dojo page in a new tab so you can schedule your free private class.';
               statusEl.style.color = '#16a34a';
             }
 
-            if (submitBtn && kicker) {
-              kicker.textContent = 'Submitted';
-              const icon = submitBtn.querySelector('span:last-child');
-              if (icon) icon.textContent = '✓';
-            }
-
-            // Lock fields so it visually feels complete
             Array.from(form.elements).forEach(el => {
               if (el.tagName === 'BUTTON') return;
               if (el.tagName === 'SELECT') {
-                el.disabled = true;
-              } else if (el.type === 'checkbox') {
                 el.disabled = true;
               } else {
                 el.readOnly = true;
               }
             });
+
+            const icon = submitBtn.querySelector('span:last-child');
+            if (icon) icon.textContent = '✓';
+            if (kicker) kicker.textContent = 'Submitted';
+
+            window.location.href = scheduleUrl;
           } else {
             throw new Error(data.message || 'Submission failed');
           }
         } catch (err) {
-          console.error('Referral submission error:', err);
+          console.error('Submission error:', err);
 
           if (statusEl) {
-            statusEl.textContent = 'Something went wrong submitting your referral. Please try again or contact your dojo.';
+            statusEl.textContent = 'Something went wrong submitting your details. Please try again.';
             statusEl.style.color = '#b91c1c';
           }
 
-          if (submitBtn && kicker) {
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = '1';
-            submitBtn.style.cursor = 'pointer';
-            kicker.textContent = 'Submit Referral';
-            const icon = submitBtn.querySelector('span:last-child');
-            if (icon) icon.textContent = '▶';
-          }
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.cursor = 'pointer';
+          if (kicker) kicker.textContent = 'Ready to schedule';
+          const icon = submitBtn.querySelector('span:last-child');
+          if (icon) icon.textContent = '▶';
         }
       });
     })();
