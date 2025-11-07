@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code Ninjas Referral Program</title>
+  <meta name="theme-color" content="#2563eb" />
+  <style>
+    :root {
+      --bg1:#0ea5e9;
+      --bg2:#2563eb;
+      --card:#ffffff;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --brand:#2563eb;
+      --accent:#22d3ee;
+      --border:#e5e7eb;
+      --radius:16px;
+      --radius-xl:22px;
+      --shadow:0 12px 30px rgba(2,6,23,.18), 0 2px 8px rgba(2,6,23,.08);
+      --shadow-soft:0 14px 40px rgba(15,23,42,.20), 0 3px 10px rgba(15,23,42,.10);
+      --font-sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif;
+      --transition-fast:0.18s ease-out;
+    }
+
+    * { box-sizing:border-box; }
+
+    html, body {
+      margin:0;
+      min-height:100%;
+      font-family:var(--font-sans);
+      color:var(--ink);
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      background-size:cover;
+    }
+
+    .page-wrap {
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:22px 16px 32px;
+      gap:14px;
+    }
+
+    header {
+      color:#eef6ff;
+      text-align:center;
+    }
+
+    header .brand {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+
+    header img.logo {
+      height:40px;
+      width:auto;
+      filter:drop-shadow(0 1px 0 rgba(0,0,0,.18));
+    }
+
+    header h1 {
+      margin:10px 0 4px;
+      font-size:clamp(24px,4.4vw,34px);
+      font-weight:900;
+    }
+
+    header p.sub {
+      margin:0;
+      font-size:clamp(13px,2.3vw,16px);
+      color:#dbeafe;
+    }
+
+    .layout {
+      width:min(640px,100%);
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      align-items:stretch;
+    }
+
+    .card {
+      background:var(--card);
+      border-radius:var(--radius-xl);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      padding:18px 18px 20px;
+    }
+
+    .hero-copy h2 {
+      margin:0 0 8px;
+      font-size:20px;
+      font-weight:800;
+      color:#0f172a;
+    }
+
+    .hero-copy p {
+      margin:4px 0 10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .highlight {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 11px;
+      border-radius:999px;
+      background:rgba(37,99,235,0.07);
+      color:#1d4ed8;
+      font-weight:700;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:6px;
+    }
+
+    .how-it-works {
+      margin-top:6px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:6px;
+      font-size:11px;
+    }
+
+    .step {
+      padding:9px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+    }
+
+    .step-label {
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#9ca3af;
+    }
+
+    .step-title {
+      font-size:12px;
+      font-weight:800;
+      color:#111827;
+    }
+
+    .step p {
+      margin:0;
+      color:#6b7280;
+    }
+
+    .mini-note {
+      margin-top:6px;
+      font-size:9px;
+      color:#9ca3af;
+    }
+
+    .form-card h2 {
+      margin:0 0 4px;
+      font-size:17px;
+      font-weight:800;
+      color:#0f172a;
+    }
+
+    .form-card p {
+      margin:0 0 8px;
+      font-size:11px;
+      color:var(--muted);
+    }
+
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+      margin-top:4px;
+    }
+
+    .field-group-label {
+      margin:8px 0 2px;
+      font-size:10px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:#9ca3af;
+    }
+
+    .row {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:7px;
+    }
+
+    .field {
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-size:10px;
+    }
+
+    .field label {
+      font-weight:600;
+      color:#6b7280;
+    }
+
+    .field span.helper {
+      font-size:9px;
+      color:#9ca3af;
+    }
+
+    input, select, textarea {
+      width:100%;
+      padding:9px 10px;
+      border-radius:11px;
+      border:1px solid var(--border);
+      font-size:11px;
+      font-family:var(--font-sans);
+      outline:none;
+      transition:border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+      background:#ffffff;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color:var(--brand);
+      box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+      background:#f9fafb;
+    }
+
+    textarea {
+      min-height:60px;
+      resize:vertical;
+    }
+
+    .checkbox-row {
+      display:flex;
+      align-items:flex-start;
+      gap:6px;
+      font-size:9px;
+      color:#6b7280;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width:auto;
+      margin-top:2px;
+      accent-color:var(--brand);
+    }
+
+    .primary-btn {
+      margin-top:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:none;
+      background:linear-gradient(90deg,var(--brand),var(--accent));
+      color:#ffffff;
+      font-weight:800;
+      font-size:12px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      box-shadow:var(--shadow-soft);
+      transition:transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .primary-btn .kicker {
+      font-size:9px;
+      font-weight:600;
+      opacity:0.92;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+    }
+
+    .primary-btn:hover {
+      transform:translateY(-1px);
+      box-shadow:0 18px 40px rgba(15,23,42,.25);
+      filter:brightness(1.03);
+    }
+
+    .primary-btn:active {
+      transform:translateY(0px);
+      box-shadow:var(--shadow-soft);
+      filter:brightness(.99);
+    }
+
+    .tiny-note {
+      margin-top:4px;
+      font-size:8px;
+      color:#9ca3af;
+      text-align:left;
+    }
+
+    .reward-banner {
+      margin-top:4px;
+      padding:7px 9px;
+      border-radius:12px;
+      background:#eff6ff;
+      border:1px solid #dbeafe;
+      font-size:9px;
+      color:#1d4ed8;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-weight:600;
+    }
+
+    .reward-banner .icon {
+      font-size:12px;
+    }
+
+    /* FAQ CARD: high contrast, easy to read */
+    .faq-card {
+      width:min(640px,100%);
+      margin:10px auto 0;
+      background:#ffffff;
+      color:#111827;
+      border-radius:18px;
+      padding:14px 16px 16px;
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+      font-size:12px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .faq-card h3 {
+      margin:0 0 4px;
+      font-size:13px;
+      font-weight:700;
+      color:#111827;
+    }
+
+    .faq-card p {
+      margin:0;
+      color:#374151; /* darker for better contrast */
+      line-height:1.65;
+      font-weight:400;
+    }
+
+    @media (max-width:768px) {
+      .page-wrap {
+        padding:14px 10px 20px;
+      }
+      header img.logo {
+        height:32px;
+      }
+      header h1 {
+        font-size:22px;
+      }
+      header p.sub {
+        font-size:12px;
+      }
+      .card {
+        padding:14px 14px 16px;
+        border-radius:18px;
+      }
+      .how-it-works {
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:4px;
+      }
+      .row {
+        grid-template-columns:1fr;
+        gap:6px;
+      }
+      .faq-card {
+        width:100%;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        padding:12px 10px 13px;
+      }
+    }
+
+    @media (max-width:520px) {
+      header h1 {
+        font-size:20px;
+      }
+      .faq-card {
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+      .reward-banner {
+        align-items:flex-start;
+      }
+    }
+      @media (min-width:1024px) {
+      .layout {
+        width:min(760px,100%);
+      }
+      header h1 {
+        font-size:36px;
+      }
+      header p.sub {
+        font-size:16px;
+      }
+      .hero-copy h2 {
+        font-size:24px;
+      }
+      .hero-copy p {
+        font-size:15px;
+      }
+      .how-it-works {
+        font-size:12px;
+      }
+      .step-title {
+        font-size:14px;
+      }
+      .mini-note {
+        font-size:10px;
+      }
+      .form-card h2 {
+        font-size:20px;
+      }
+      .form-card p {
+        font-size:13px;
+      }
+      .field-group-label {
+        font-size:11px;
+      }
+      .field {
+        font-size:11px;
+      }
+      input, select, textarea {
+        font-size:12px;
+        padding:10px 11px;
+      }
+      .checkbox-row {
+        font-size:10px;
+      }
+      .primary-btn {
+        font-size:13px;
+      }
+      .primary-btn .kicker {
+        font-size:10px;
+      }
+      .tiny-note {
+        font-size:9px;
+      }
+      .faq-card {
+        width:min(760px,100%);
+        font-size:13px;
+      }
+      .faq-card h3 {
+        font-size:14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header>
+      <div class="brand">
+        <img class="logo" src="https://www.codeninjas.com/hubfs/Group%201.svg" alt="Code Ninjas logo" onerror="this.style.display='none'">
+      </div>
+      <h1>Code Ninjas Referral Program</h1>
+      <p class="sub">Refer a friend in under 30 seconds. Get <strong>$100 off</strong> when they enroll.</p>
+    </header>
+
+    <main class="layout">
+      <!-- Compact hero/overview -->
+      <section class="card hero-copy" aria-label="Referral overview">
+        <div class="highlight">
+          <span>$100 Referral Reward</span>
+        </div>
+        <h2>Refer in seconds.</h2>
+        <p>
+          Tell us who you are and who you're referring. If they enroll in a qualifying program at your dojo,
+          you receive <strong>$100 off your next month</strong>.
+        </p>
+        <div class="how-it-works" style="margin-top:10px; grid-template-columns:repeat(3,minmax(0,1fr));">
+          <div class="step">
+            <div class="step-label">1</div>
+            <div class="step-title">Submit</div>
+            <p>Share your info and your friend's details.</p>
+          </div>
+          <div class="step">
+            <div class="step-label">2</div>
+            <div class="step-title">We Invite</div>
+            <p>Our team reaches out with a friendly, no-pressure invite.</p>
+          </div>
+          <div class="step">
+            <div class="step-label">3</div>
+            <div class="step-title">You Save</div>
+            <p>When they enroll, you get $100 off.</p>
+          </div>
+        </div>
+        <p class="mini-note">
+          New families only. Credit applied after enrollment; one $100 credit per new family referred.
+        </p>
+      </section>
+
+      <!-- Clean single-column form -->
+      <section class="card form-card" aria-label="Referral form">
+        <h2>Start a Referral</h2>
+        <p>One simple form. We handle the rest.</p>
+        <div class="reward-banner">
+          <span class="icon">✨</span>
+          <span><strong>$100 off</strong> your next month when your referral enrolls.</span>
+        </div>
+        <form>
+          <div class="field-group-label">Your Info</div>
+          <div class="field">
+            <label for="ref-parent-name">Your Name*</label>
+            <input id="ref-parent-name" name="refParentName" required />
+          </div>
+          <div class="field">
+            <label for="ref-location">Your Dojo*</label>
+            <select id="ref-location" name="refLocation" required>
+              <option value="" disabled selected>Select your location</option>
+              <option value="Aventura">Aventura</option>
+              <option value="Cooper City">Cooper City</option>
+              <option value="Weston">Weston</option>
+            </select>
+          </div>
+
+          <div class="field-group-label">Friend's Info</div>
+          <div class="field">
+            <label for="guest-parent-name">Parent Name*</label>
+            <input id="guest-parent-name" name="guestParentName" required />
+          </div>
+          <div class="field">
+            <label for="guest-child-name">Child's Name*</label>
+            <input id="guest-child-name" name="guestChildName" required />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="guest-email">Parent Email*</label>
+              <input id="guest-email" name="guestEmail" type="email" required />
+            </div>
+            <div class="field">
+              <label for="guest-phone">Preferred Phone*</label>
+              <input id="guest-phone" name="guestPhone" type="tel" required />
+            </div>
+          </div>
+
+          <div class="field-group-label">Permission</div>
+          <div class="checkbox-row">
+            <input id="consent" name="consent" type="checkbox" required />
+            <label for="consent">
+              I confirm I have permission to share this family's details so Code Ninjas may send them a one-time invitation.
+            </label>
+          </div>
+
+          <button type="submit" class="primary-btn">
+            <div>
+              <div class="kicker">Submit Referral</div>
+              <div>Send my friend an invite</div>
+            </div>
+            <span>▶</span>
+          </button>
+
+          <div class="tiny-note">
+            We’ll reach out respectfully with more information about Code Ninjas—no spam, no pressure.
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <section class="faq-card" aria-label="Referral FAQs">
+      <div>
+        <h3>Who can I refer?</h3>
+        <p>Any family that is new to Code Ninjas and not currently enrolled or already in our sign-up process.</p>
+      </div>
+      <div>
+        <h3>When is $100 applied?</h3>
+        <p>After your referred family completes enrollment in a qualifying program at your dojo, your $100 credit is applied to your next billing cycle.</p>
+      </div>
+      <div>
+        <h3>Can I refer more than one?</h3>
+        <p>Yes. Each new family that enrolls through your referral can earn you an additional $100 credit, per location policy.</p>
+      </div>
+      <div>
+        <h3>How will they be contacted?</h3>
+        <p>Our team sends a friendly invite to learn about Code Ninjas—no spam, just information and an opportunity to visit.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
